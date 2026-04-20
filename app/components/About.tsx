@@ -31,7 +31,7 @@ export function About() {
               See the schedule
             </a>
             <a
-              href="mailto:hello@riddimwsm.com"
+              href="#contact"
               className="rounded-full border border-white/20 text-cream px-5 py-2.5 text-sm font-medium hover:border-gold hover:text-gold transition-colors"
             >
               Get in touch

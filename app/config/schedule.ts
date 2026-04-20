@@ -2,7 +2,6 @@ export type Show = {
   id: string;
   title: string;
   host: string;
-  genre: string;
   day:
     | "Mon"
     | "Tue"
@@ -12,77 +11,104 @@ export type Show = {
     | "Sat"
     | "Sun"
     | "Daily";
-  start: string; // 24h "HH:mm" local to station (ET)
-  end: string;
-  description: string;
+  start: string; // 24h "HH:mm"
+  end: string; // may cross midnight (e.g. "02:00")
+  crossesMidnight?: boolean;
+  notes?: string;
 };
 
-// Placeholder schedule — edit freely. Times are Eastern Time.
+// Current Riddim WSM programming schedule.
+// Between live shows the autoDJ keeps the riddim rolling 24/7.
 export const SCHEDULE: Show[] = [
   {
-    id: "morning-irie",
-    title: "Morning Irie",
-    host: "DJ Selassie I",
-    genre: "Roots Reggae",
-    day: "Daily",
+    id: "gospel-sundays",
+    title: "Gospel Sundays",
+    host: "Wally B",
+    day: "Sun",
     start: "06:00",
-    end: "09:00",
-    description:
-      "Start the day with roots, culture and conscious vibrations from Kingston to Toronto.",
+    end: "18:00",
   },
   {
-    id: "dancehall-drive",
-    title: "Dancehall Drive",
-    host: "Lady Sovereign",
-    genre: "Dancehall",
-    day: "Mon",
-    start: "16:00",
+    id: "lick-samba",
+    title: "Lick Samba",
+    host: "Stephen C",
+    day: "Sun",
+    start: "17:00",
     end: "19:00",
-    description:
-      "The hottest dancehall bangers to carry you through rush hour. Fresh bashment every show.",
   },
   {
-    id: "soca-saturdays",
-    title: "Soca Saturdays",
-    host: "DJ Tempo",
-    genre: "Soca & Calypso",
-    day: "Sat",
-    start: "14:00",
-    end: "17:00",
-    description:
-      "All the road march you can handle. Trini, Bajan, Vincy, Grenadian — every flag represented.",
-  },
-  {
-    id: "lovers-rock",
-    title: "Lovers Rock Sunday",
-    host: "Miss Empress",
-    genre: "Lovers Rock",
+    id: "oldies-but-goodies",
+    title: "Oldies but Goodies",
+    host: "Wally B",
     day: "Sun",
     start: "20:00",
-    end: "23:00",
-    description:
-      "Smooth lovers rock and classic reggae slow jams to close out your weekend.",
+    end: "22:00",
   },
   {
-    id: "riddim-clash",
-    title: "Riddim Clash",
-    host: "Selector Fyah",
-    genre: "Sound System",
+    id: "irevibes",
+    title: "IreVibes",
+    host: "VjKRES & Easy-E",
+    day: "Mon",
+    start: "19:00",
+    end: "21:00",
+  },
+  {
+    id: "soul-train",
+    title: "Soul Train",
+    host: "The Professor",
+    day: "Tue",
+    start: "18:00",
+    end: "21:00",
+  },
+  {
+    id: "tun-it-up-tuesdays",
+    title: "Tun it up Tuesdays",
+    host: "Rassaudio",
+    day: "Tue",
+    start: "21:00",
+    end: "23:00",
+  },
+  {
+    id: "mixed-moods-and-attitudes",
+    title: "Mixed Moods and Attitudes",
+    host: "Wattawan",
+    day: "Wed",
+    start: "20:00",
+    end: "00:00",
+    crossesMidnight: true,
+  },
+  {
+    id: "dancehall-night",
+    title: "Dancehall Night",
+    host: "Various DJs",
+    day: "Thu",
+    start: "19:00",
+    end: "21:00",
+  },
+  {
+    id: "iroots",
+    title: "IROOTS",
+    host: "Sligo",
+    day: "Fri",
+    start: "19:00",
+    end: "22:00",
+  },
+  {
+    id: "in-the-scheme-of-things",
+    title: "In the Scheme of Things",
+    host: "Stevie Dred",
     day: "Fri",
     start: "22:00",
-    end: "01:00",
-    description:
-      "Two hours, three selectors, one winner. Weekly sound-clash showdown live from the studio.",
+    end: "02:00",
+    crossesMidnight: true,
   },
   {
-    id: "caribbean-news",
-    title: "Caribbean News Hour",
-    host: "Marva Thompson",
-    genre: "News & Talk",
-    day: "Wed",
-    start: "12:00",
-    end: "13:00",
-    description:
-      "Headlines from across the Caribbean and the diaspora in Canada, the UK and the US.",
+    id: "party-mix",
+    title: "Party Mix",
+    host: "Wally B",
+    day: "Sat",
+    start: "22:00",
+    end: "02:00",
+    crossesMidnight: true,
   },
 ];

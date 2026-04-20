@@ -20,7 +20,7 @@ export function Sponsors() {
           </h2>
         </div>
         <a
-          href="mailto:hello@riddimwsm.com?subject=Sponsor%20Riddim%20WSM"
+          href="mailto:RiddimWSM@gmail.com?subject=Sponsor%20Riddim%20WSM"
           className="inline-flex items-center gap-2 rounded-full border border-gold/60 text-gold px-5 py-2 text-sm hover:bg-gold hover:text-ink transition-colors"
         >
           Become a sponsor →

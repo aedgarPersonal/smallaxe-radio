@@ -2,9 +2,16 @@ import { Player } from "@/app/components/Player";
 import { Schedule } from "@/app/components/Schedule";
 import { Sponsors } from "@/app/components/Sponsors";
 import { About } from "@/app/components/About";
+import { Contact } from "@/app/components/Contact";
 import { STATION } from "@/app/config/station";
 
 export default function Home() {
+  const thisYear = new Date().getFullYear();
+  const copyYears =
+    thisYear > STATION.copyrightSince
+      ? `${STATION.copyrightSince}–${thisYear}`
+      : `${STATION.copyrightSince}`;
+
   return (
     <>
       <header className="relative overflow-hidden caribbean-gradient">
@@ -27,6 +34,9 @@ export default function Home() {
             </a>
             <a href="#about" className="hover:text-gold transition-colors">
               About
+            </a>
+            <a href="#contact" className="hover:text-gold transition-colors">
+              Contact
             </a>
           </div>
         </nav>
@@ -55,19 +65,30 @@ export default function Home() {
         <Schedule />
         <Sponsors />
         <About />
+        <Contact />
       </main>
 
       <footer className="mt-20 border-t border-white/10">
         <div className="h-1 flag-stripes" aria-hidden />
-        <div className="mx-auto max-w-6xl px-5 sm:px-8 py-10 flex flex-wrap gap-4 items-center justify-between text-sm text-cream/60">
-          <div>
-            © {new Date().getFullYear()} {STATION.name}. One love.
+        <div className="mx-auto max-w-6xl px-5 sm:px-8 py-10 grid gap-6 sm:grid-cols-[1fr_auto] items-center">
+          <div className="text-sm text-cream/60 space-y-1">
+            <div>
+              Copyright © {copyYears} riddimwsm. All rights reserved.
+            </div>
+            <div className="text-cream/40 italic text-xs">
+              The views expressed by the hosts of the various shows are not
+              necessarily the views of Riddim WSM.
+            </div>
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4 text-sm text-cream/60">
             {STATION.socials.map((s) => (
               <a
                 key={s.href}
                 href={s.href}
+                target={s.href.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  s.href.startsWith("http") ? "noopener noreferrer" : undefined
+                }
                 className="hover:text-gold transition-colors"
               >
                 {s.label}
@@ -81,7 +102,6 @@ export default function Home() {
             >
               Source
             </a>
-            <span className="text-cream/40">World Sound Music</span>
           </div>
         </div>
       </footer>
