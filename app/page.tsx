@@ -30,7 +30,7 @@ export default function Home() {
               Schedule
             </a>
             <a href="#sponsors" className="hover:text-gold transition-colors">
-              Sponsors
+              Spotlight
             </a>
             <a href="#about" className="hover:text-gold transition-colors">
               About
