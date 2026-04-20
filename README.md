@@ -33,6 +33,23 @@ Everything content-ish lives in `app/config/`:
 
 Edit those and redeploy — no other code changes needed.
 
+## Environment variables
+
+All optional — the site runs fine without any of these, with sensible
+demo fallbacks:
+
+| Var | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_DONATE_URL` | Donate button target. Defaults to a Ko-fi placeholder. Set to a real Ko-fi profile or Stripe Payment Link. |
+| `NEXT_PUBLIC_TAWK_PROPERTY_ID` | [tawk.to](https://tawk.to) property id. When combined with the widget id below, activates the real live-chat widget. |
+| `NEXT_PUBLIC_TAWK_WIDGET_ID` | tawk.to widget id. Paired with the property id. |
+
+If the tawk.to env vars aren't set, the floating Chat button opens a
+fallback modal pointing listeners at the station's phone and email.
+
+Set them in Vercel → Project → Settings → Environment Variables, or in
+a local `.env.local` file for development.
+
 ## How the stream works
 
 - `app/api/stream/route.ts` proxies the upstream Icecast stream so the browser

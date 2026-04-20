@@ -22,4 +22,21 @@ export const STATION = {
     { label: "Twitter", href: "https://twitter.com/RiddimWSM" },
     { label: "Facebook", href: "https://www.facebook.com/RiddimWSM" },
   ],
+  // Donations — demo uses a Ko-fi placeholder URL. Replace with a real Ko-fi
+  // profile or Stripe Payment Link via the NEXT_PUBLIC_DONATE_URL env var.
+  donate: {
+    url:
+      process.env.NEXT_PUBLIC_DONATE_URL ||
+      "https://ko-fi.com/riddimwsm",
+    label: "Donate",
+    pitch:
+      "Riddim WSM is independent and listener-supported. Keep the riddim rolling.",
+  },
+  // Live chat — if both NEXT_PUBLIC_TAWK_PROPERTY_ID and
+  // NEXT_PUBLIC_TAWK_WIDGET_ID are set the tawk.to widget loads automatically.
+  // Otherwise the chat button opens a fallback modal with contact details.
+  chat: {
+    tawkPropertyId: process.env.NEXT_PUBLIC_TAWK_PROPERTY_ID || "",
+    tawkWidgetId: process.env.NEXT_PUBLIC_TAWK_WIDGET_ID || "",
+  },
 } as const;

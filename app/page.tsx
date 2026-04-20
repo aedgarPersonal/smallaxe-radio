@@ -3,6 +3,8 @@ import { Schedule } from "@/app/components/Schedule";
 import { Sponsors } from "@/app/components/Sponsors";
 import { About } from "@/app/components/About";
 import { Contact } from "@/app/components/Contact";
+import { Support } from "@/app/components/Support";
+import { TawkChat } from "@/app/components/TawkChat";
 import { STATION } from "@/app/config/station";
 
 export default function Home() {
@@ -25,7 +27,7 @@ export default function Home() {
               {STATION.name}
             </span>
           </a>
-          <div className="hidden sm:flex gap-6 text-sm text-cream/80">
+          <div className="hidden sm:flex items-center gap-6 text-sm text-cream/80">
             <a href="#schedule" className="hover:text-gold transition-colors">
               Schedule
             </a>
@@ -37,6 +39,14 @@ export default function Home() {
             </a>
             <a href="#contact" className="hover:text-gold transition-colors">
               Contact
+            </a>
+            <a
+              href={STATION.donate.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-gold text-ink px-4 py-1.5 font-medium hover:bg-green-bright hover:text-cream transition-colors"
+            >
+              {STATION.donate.label}
             </a>
           </div>
         </nav>
@@ -64,9 +74,12 @@ export default function Home() {
       <main className="mx-auto max-w-6xl px-5 sm:px-8">
         <Schedule />
         <Sponsors />
+        <Support />
         <About />
         <Contact />
       </main>
+
+      <TawkChat />
 
       <footer className="mt-20 border-t border-white/10">
         <div className="h-1 flag-stripes" aria-hidden />
