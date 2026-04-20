@@ -45,7 +45,7 @@ export default function Home() {
           <div>
             <p className="inline-flex items-center gap-2 text-xs font-display tracking-[0.3em] text-gold">
               <span className="inline-block h-2 w-2 rounded-full bg-red" />
-              LIVE FROM THE 6IX TO KINGSTON
+              LIVE FROM THE 6IX TO THE WORLD
             </p>
             <h1 className="mt-5 font-display text-6xl sm:text-7xl lg:text-8xl leading-[0.95] text-cream">
               Caribbean sounds{" "}
