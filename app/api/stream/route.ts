@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 // through with the original audio content-type.
 export async function GET(_req: NextRequest) {
   const upstream = await fetch(STATION.streamUrl, {
-    headers: { "User-Agent": "SmallAxeRadio/1.0 (+https://smallaxe.radio)" },
+    headers: { "User-Agent": "RiddimWSM/1.0 (+https://smallaxe-radio.vercel.app)" },
     cache: "no-store",
     // @ts-expect-error — duplex is required by the fetch spec for streaming bodies
     duplex: "half",

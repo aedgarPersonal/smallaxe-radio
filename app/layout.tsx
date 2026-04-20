@@ -14,11 +14,11 @@ const bebas = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: "Small Axe Radio — Caribbean Sounds from the North",
+  title: "Riddim WSM — World Sound Music | Caribbean Radio",
   description:
-    "Small Axe Radio streams reggae, dancehall, soca and roots for the Caribbean diaspora in Canada and beyond. Live 24/7.",
+    "Riddim WSM (World Sound Music) streams reggae, dancehall, soca and roots for the Caribbean diaspora in Canada and beyond. Live 24/7.",
   openGraph: {
-    title: "Small Axe Radio",
+    title: "Riddim WSM — World Sound Music",
     description:
       "Caribbean sounds from the North — reggae, dancehall, soca, roots. Live 24/7.",
     type: "website",

@@ -22,7 +22,7 @@ type IcecastStatus = {
 export async function GET() {
   try {
     const res = await fetch(STATION.statusUrl, {
-      headers: { "User-Agent": "SmallAxeRadio/1.0" },
+      headers: { "User-Agent": "RiddimWSM/1.0" },
       cache: "no-store",
       signal: AbortSignal.timeout(6000),
     });

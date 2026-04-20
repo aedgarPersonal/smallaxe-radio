@@ -9,7 +9,7 @@ export function About() {
             ABOUT THE STATION
           </p>
           <h2 className="mt-2 text-4xl sm:text-5xl font-display text-cream">
-            One small axe,<br />one big sound.
+            World sound,<br />one riddim.
           </h2>
           <p className="mt-6 text-cream/75 leading-relaxed max-w-xl">
             {STATION.name} is an independent internet radio station streaming
@@ -31,7 +31,7 @@ export function About() {
               See the schedule
             </a>
             <a
-              href="mailto:hello@smallaxe.radio"
+              href="mailto:hello@riddimwsm.com"
               className="rounded-full border border-white/20 text-cream px-5 py-2.5 text-sm font-medium hover:border-gold hover:text-gold transition-colors"
             >
               Get in touch

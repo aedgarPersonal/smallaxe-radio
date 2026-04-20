@@ -1,7 +1,8 @@
-# Small Axe Radio
+# Riddim WSM
 
-Caribbean internet radio for the diaspora — a small, focused web front-end for
-streaming, show information, and local-business sponsor slots.
+**Riddim WSM** (World Sound Music) — Caribbean internet radio for the
+diaspora. A small, focused web front-end for streaming, show information, and
+local-business sponsor slots.
 
 Streams the RiddimWSM Canadian/Caribbean audio feed 24/7 via a Next.js API
 proxy (the upstream is HTTP-only, so the proxy is what lets it play from an

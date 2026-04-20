@@ -10,9 +10,9 @@ export default function Home() {
       <header className="relative overflow-hidden caribbean-gradient">
         <div className="absolute inset-x-0 top-0 h-1 flag-stripes" aria-hidden />
         <nav className="relative mx-auto max-w-6xl px-5 sm:px-8 pt-6 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-2">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gold text-ink font-display text-lg">
-              SA
+          <a href="/" className="flex items-center gap-3">
+            <span className="inline-flex h-9 px-2 items-center justify-center rounded-lg bg-gold text-ink font-display text-base tracking-widest">
+              WSM
             </span>
             <span className="font-display text-xl tracking-wider">
               {STATION.name}
@@ -81,6 +81,7 @@ export default function Home() {
             >
               Source
             </a>
+            <span className="text-cream/40">World Sound Music</span>
           </div>
         </div>
       </footer>
