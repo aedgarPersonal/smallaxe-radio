@@ -82,11 +82,18 @@ curl -X POST https://smallaxe-radio.vercel.app/api/push/broadcast \
 
 ## How the stream works
 
-- `app/api/stream/route.ts` proxies the upstream Icecast stream so the browser
-  can load it from the site's HTTPS origin.
-- `app/api/now-playing/route.ts` hits `status-json.xsl` on the upstream and
-  returns the current title, listener count, bitrate, and genre.
-- The player component polls `/api/now-playing` every 15s.
+- The `<audio>` element connects **directly** to the upstream HTTPS Icecast at
+  `https://riddimwsm.radioca.st/stream`. Vercel is not in the audio path, so
+  listener hours do not consume Vercel bandwidth or function time. This is
+  important: a proxied audio stream on Vercel would hit function-duration
+  limits (~15 min max) and burn ~58 MB/hour/listener in egress.
+- `app/api/now-playing/route.ts` is server-side only and hits
+  `status-json.xsl` on the upstream. It returns the current title, listener
+  count, bitrate, and genre. The player polls it every 15s. Each poll is
+  ~1 KB and the request is server-to-server (upstream → Vercel → browser) to
+  bypass CORS.
+- If the upstream ever drops HTTPS you can re-introduce a Node proxy, but
+  expect the bandwidth and duration-limit consequences above.
 
 ## Deploy
 

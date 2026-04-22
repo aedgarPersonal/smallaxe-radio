@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { STATION } from "@/app/config/station";
 
 type NowPlaying = {
   online: boolean;
@@ -57,8 +58,12 @@ export function Player() {
       return;
     }
     setLoading(true);
-    // Cache-bust so the browser always opens a fresh stream.
-    el.src = `/api/stream?t=${Date.now()}`;
+    // Connect the audio element directly to the upstream HTTPS stream. This
+    // keeps audio bytes off the Vercel function path entirely.
+    // Cache-bust so the browser always opens a fresh stream instead of
+    // replaying stale buffer.
+    const sep = STATION.streamUrl.includes("?") ? "&" : "?";
+    el.src = `${STATION.streamUrl}${sep}t=${Date.now()}`;
     try {
       await el.play();
       setPlaying(true);
@@ -159,7 +164,11 @@ export function Player() {
         </p>
       )}
 
-      <audio ref={audioRef} preload="none" crossOrigin="anonymous" />
+      {/* No crossOrigin attribute: the upstream Icecast doesn't send CORS
+          headers, and simple playback doesn't need them. Setting
+          crossOrigin="anonymous" would fail the CORS preflight and block
+          audio entirely. */}
+      <audio ref={audioRef} preload="none" />
     </div>
   );
 }

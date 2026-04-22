@@ -6,9 +6,11 @@ export const STATION = {
     "World Sound Music — reggae, dancehall, soca, roots and rockers — serving the Caribbean diaspora across Canada and the world, 24 hours a day.",
   origin: "Broadcasting from Canada",
   copyrightSince: 2020,
-  // Upstream Icecast/Shoutcast stream. Served over HTTP, so we proxy through /api/stream.
-  streamUrl: "http://riddimwsm.radioca.st/stream",
-  statusUrl: "http://riddimwsm.radioca.st/status-json.xsl",
+  // Upstream Icecast/Shoutcast stream. HTTPS works on GET even though HEAD
+  // returns 400, so the browser can connect directly — no Vercel proxy in the
+  // audio path, which keeps bandwidth and function costs at zero for audio.
+  streamUrl: "https://riddimwsm.radioca.st/stream",
+  statusUrl: "https://riddimwsm.radioca.st/status-json.xsl",
   contact: {
     landline: "613-699-0669",
     mobile: "613-265-3339",
