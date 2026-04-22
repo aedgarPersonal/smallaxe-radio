@@ -2,9 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { STATION } from "@/app/config/station";
+import { currentShow } from "@/app/lib/current-show";
+import type { Show } from "@/app/config/schedule";
 
 type NowPlaying = {
   online: boolean;
+  isLive: boolean;
+  activeMount: "live" | "autodj" | "stream" | "other" | null;
   title: string | null;
   stationName: string;
   description: string;
@@ -20,6 +24,9 @@ export function Player() {
   const [volume, setVolume] = useState(0.8);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<NowPlaying | null>(null);
+  // Computed client-side from the schedule + user's wall clock. Nulled on
+  // the server render to avoid hydration mismatch — filled in an effect.
+  const [show, setShow] = useState<Show | null>(null);
 
   useEffect(() => {
     let stop = false;
@@ -39,6 +46,14 @@ export function Player() {
       stop = true;
       clearInterval(iv);
     };
+  }, []);
+
+  // Re-evaluate the current scheduled show every minute. Cheap; no network.
+  useEffect(() => {
+    const update = () => setShow(currentShow(new Date()));
+    update();
+    const iv = setInterval(update, 60_000);
+    return () => clearInterval(iv);
   }, []);
 
   useEffect(() => {
@@ -79,20 +94,51 @@ export function Player() {
 
   const nowPlaying = info?.title ?? "Live stream";
   const listeners = info?.listeners ?? 0;
+  // "LIVE" means a human DJ is actively broadcasting (upstream /live mount
+  // has content). Otherwise it's AutoDJ filling time between shows.
+  const isLive = !!info?.isLive;
+  const statusLabel = !info
+    ? ""
+    : !info.online
+      ? "OFFLINE"
+      : isLive
+        ? "LIVE · ON AIR"
+        : "AUTODJ · ON AIR";
+  const statusTone = isLive ? "text-red" : "text-green-bright";
+  const dotTone = isLive ? "bg-red" : "bg-green-bright";
 
   return (
     <div className="rounded-3xl bg-ink-2/80 backdrop-blur border border-white/10 p-5 sm:p-7 shadow-2xl">
-      <div className="flex items-center gap-3 text-xs font-display tracking-widest text-green-bright">
+      <div className={`flex items-center gap-3 text-xs font-display tracking-widest ${statusTone}`}>
         <span
-          className={`inline-block h-2.5 w-2.5 rounded-full bg-green-bright ${playing ? "live-dot" : ""}`}
+          className={`inline-block h-2.5 w-2.5 rounded-full ${dotTone} ${info?.online ? "live-dot" : ""}`}
         />
-        <span>{playing ? "ON AIR" : info?.online ? "LIVE · STANDBY" : "OFFLINE"}</span>
+        <span>{statusLabel}</span>
         {info?.bitrate && (
           <span className="ml-auto text-cream/50 tracking-normal font-sans">
             {info.bitrate} kbps
           </span>
         )}
       </div>
+
+      {show && (
+        <div className="mt-4 flex items-start gap-3 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3">
+          <svg viewBox="0 0 24 24" className="h-5 w-5 mt-0.5 text-gold shrink-0" fill="currentColor" aria-hidden>
+            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 11h4a1 1 0 0 1 0 2h-5a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0Z" />
+          </svg>
+          <div className="min-w-0">
+            <div className="text-[10px] font-display tracking-[0.25em] text-gold">
+              NOW ON AIR
+            </div>
+            <div className="text-base sm:text-lg font-display text-cream leading-tight truncate">
+              {show.title}
+            </div>
+            <div className="text-xs text-cream/70 truncate">
+              with {show.host}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="mt-4 flex items-center gap-4 sm:gap-6">
         <button
