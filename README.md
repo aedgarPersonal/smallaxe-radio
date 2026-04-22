@@ -40,15 +40,45 @@ demo fallbacks:
 
 | Var | Purpose |
 | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL, used for OG image resolution and default push deep-links. |
 | `NEXT_PUBLIC_DONATE_URL` | Donate button target. Defaults to a Ko-fi placeholder. Set to a real Ko-fi profile or Stripe Payment Link. |
 | `NEXT_PUBLIC_TAWK_PROPERTY_ID` | [tawk.to](https://tawk.to) property id. When combined with the widget id below, activates the real live-chat widget. |
 | `NEXT_PUBLIC_TAWK_WIDGET_ID` | tawk.to widget id. Paired with the property id. |
-
-If the tawk.to env vars aren't set, the floating Chat button opens a
-fallback modal pointing listeners at the station's phone and email.
+| `NEXT_PUBLIC_VAPID_PUBLIC_KEY` | Web Push public key. Pair with `VAPID_PRIVATE_KEY` to enable the subscribe flow. Generate with `npx web-push generate-vapid-keys`. |
+| `VAPID_PRIVATE_KEY` | Web Push private key. Never expose publicly. |
+| `VAPID_CONTACT` | Contact `mailto:` address used in VAPID headers (defaults to `mailto:RiddimWSM@gmail.com`). |
+| `PUSH_ADMIN_TOKEN` | Long random token; required in the `x-admin-token` header to call `/api/push/broadcast`. |
+| `KV_REST_API_URL` / `KV_REST_API_TOKEN` | Populated automatically when Upstash Redis is connected (see below). Without these, push subscriptions fall back to in-memory (lost on cold start). |
 
 Set them in Vercel → Project → Settings → Environment Variables, or in
 a local `.env.local` file for development.
+
+## Provisioning push storage (Upstash Redis)
+
+The push subscribe/broadcast flow works in demo mode without any
+database. To actually hold onto subscriptions between cold starts you
+need Upstash Redis (Vercel KV's marketplace successor):
+
+1. Open [the Upstash terms page](https://vercel.com/~/integrations/accept-terms/upstash?source=cli) and accept the EULA + privacy policy.
+2. Run:
+   ```bash
+   vercel integration add upstash/upstash-kv --name riddim-wsm-push \
+     --plan free -e production -e development
+   ```
+3. Pull the new env vars locally: `vercel env pull .env.local`
+4. Redeploy: `vercel --prod`
+
+After this, `/api/push/subscribe` will persist subscriptions and
+`/api/push/broadcast` will fan out to every browser that opted in.
+
+## Sending a broadcast
+
+```bash
+curl -X POST https://smallaxe-radio.vercel.app/api/push/broadcast \
+  -H "x-admin-token: $PUSH_ADMIN_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Going live now","body":"IROOTS with Sligo","url":"/#schedule"}'
+```
 
 ## How the stream works
 

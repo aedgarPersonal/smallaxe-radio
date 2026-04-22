@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Riddim WSM">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b0f0b"/>
+      <stop offset="100%" stop-color="#141b15"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="0" y="0" width="512" height="14" fill="#009b3a"/>
+  <rect x="0" y="14" width="512" height="14" fill="#fed100"/>
+  <rect x="0" y="28" width="512" height="14" fill="#e1403b"/>
+  <g fill="#fed100" font-family="'Impact','Bebas Neue',sans-serif" font-weight="700" text-anchor="middle" letter-spacing="6">
+    <text x="256" y="290" font-size="160">WSM</text>
+  </g>
+  <text x="256" y="380" fill="#f6efe1" font-family="'Impact','Bebas Neue',sans-serif" font-size="52" text-anchor="middle" letter-spacing="12">RIDDIM</text>
+  <text x="256" y="440" fill="#1dbf55" font-family="sans-serif" font-size="26" text-anchor="middle" letter-spacing="2">WORLD · SOUND · MUSIC</text>
+</svg>

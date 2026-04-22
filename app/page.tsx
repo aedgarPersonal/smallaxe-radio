@@ -5,6 +5,8 @@ import { About } from "@/app/components/About";
 import { Contact } from "@/app/components/Contact";
 import { Support } from "@/app/components/Support";
 import { TawkChat } from "@/app/components/TawkChat";
+import { GetTheApp } from "@/app/components/GetTheApp";
+import { InstallPrompt } from "@/app/components/InstallPrompt";
 import { STATION } from "@/app/config/station";
 
 export default function Home() {
@@ -39,6 +41,9 @@ export default function Home() {
             </a>
             <a href="#contact" className="hover:text-gold transition-colors">
               Contact
+            </a>
+            <a href="#app" className="hover:text-gold transition-colors">
+              Get the app
             </a>
             <a
               href={STATION.donate.url}
@@ -75,11 +80,13 @@ export default function Home() {
         <Schedule />
         <Sponsors />
         <Support />
+        <GetTheApp />
         <About />
         <Contact />
       </main>
 
       <TawkChat />
+      <InstallPrompt />
 
       <footer className="mt-20 border-t border-white/10">
         <div className="h-1 flag-stripes" aria-hidden />
