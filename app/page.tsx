@@ -29,6 +29,11 @@ export default function Home() {
               {STATION.name}
             </span>
           </a>
+          {/* Mobile: only show the install CTA — full nav lives below the
+              fold on small screens, so this keeps "get the app" reachable. */}
+          <div className="sm:hidden">
+            <InstallPrompt asButton />
+          </div>
           <div className="hidden sm:flex items-center gap-6 text-sm text-cream/80">
             <a href="#schedule" className="hover:text-gold transition-colors">
               Schedule
@@ -100,7 +105,10 @@ export default function Home() {
               necessarily the views of Riddim WSM.
             </div>
           </div>
-          <div className="flex flex-wrap gap-4 text-sm text-cream/60">
+          <div className="flex flex-wrap gap-4 items-center text-sm text-cream/60">
+            <a href="#app" className="hover:text-gold transition-colors">
+              📱 Install app
+            </a>
             {STATION.socials.map((s) => (
               <a
                 key={s.href}
